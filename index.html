@@ -20,7 +20,19 @@
   <body>
     <h3>Sendo Messegi</h3>
 
-    <textarea name="name" rows="8" cols="80"></textarea>
+  <div class="" id="sendDiv">
+    <textarea id ="messageInput" name="name" rows="8" cols="80" placeholder="start typing here, coward"></textarea>
+    <button id="sendMessageBtn" type="button" name="button">send messegi</button>
+  </div>
+
+  <div class="hidden" id="receiveDiv">
+    <button id="receiveMessageBtn" type="button"
+    name="button">receive message</button>
+    <p id="receivedMessage"></p>
+    <button id="sendAgainBtn" class="hidden" type="button"
+    name="button">send another message</button>
+  </div>
+
 
     <script src="js/sketch.js"></script>
     <script src="js/yeeBoi.js"></script>

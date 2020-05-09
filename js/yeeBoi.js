@@ -12,6 +12,9 @@ function gotData(data){
 
    // create an array of the post values (if you need to loop through it retaining order of entries)
    fbDataArray = Object.values(fbData);
+
+   console.log(fbDataArray);
+
  } else {
    console.log('nothing in this folder yet');
  }
@@ -34,7 +37,7 @@ firebase.database().ref(_nodeFolder + '/' + _nodeId).set(_nodeObject);
 
 // the update method will update an existing node
 function updateNode(_nodeFolder, _nodeID, _updateObject) {
-firebase.database().ref(_nodeFolder + '/' + _nodeId).update(_updateObject);
+  firebase.database().ref(_nodeFolder + '/' + _nodeID).update(_updateObject);
 // this will update existing key:value pair(s) OR add new ones to your object
 // so your object might look like:
 // { existingKey: updatedKeyValue,

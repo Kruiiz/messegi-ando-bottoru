@@ -7,10 +7,31 @@ let fbData; // data we pull from firebase
 let fbDataArray; // firebase data values converted to an array
 let database; // reference to our firebase database
 let folderName = 'messages'; // name of folder you create in db
+let messageInput;
+let sendMessageBtn;
+let receiveMessageBtn;
+let sendAgainBtn;
+let receivedMessageBtn;
+let receiveDiv, sendDiv;
 
 
 function setup() {
+
   noCanvas();
+
+  //messageInput = select("#messageInput");
+  messageInput = document.querySelector("#messageInput");
+  sendMessageBtn = document.querySelector("#sendMessageBtn");
+  receiveMessageBtn = document.querySelector("#receiveMessageBtn");
+  receivedMessageBtn = document.querySelector("#receivedMessageBtn");
+  sendAgainBtn = document.querySelector("#sendAgainBtn");
+  receiveDiv = document.querySelector("#receiveDiv");
+  sendDiv = document.querySelector("#sendDiv");
+
+  sendMessageBtn.addEventListener('click', sendMessage);
+  receiveMessageBtn.addEventListener('click', receiveMessage);
+  sendAgainBtn.addEventListener('click', sendAgain);
+
 
   let config = {
       apiKey: "AIzaSyCAdI1AB0j68UFP3vQUibwi3_nuoHQAPPo",
@@ -45,5 +66,71 @@ ref.on('value', gotData, errData);
 }
 
 function draw() {
+
+}
+
+function sendMessage() {
+
+if (messageInput.value) {
+  let timestamp = Date.now();
+
+  nodeData = {
+    messageText: messageInput.value,
+    timestamp: timestamp,
+    received: false,
+  }
+
+  createNode(folderName, timestamp, nodeData);
+
+  console.log("sent message:");
+  console.log(nodeData);
+
+//createP(`sent mesage: ${nodeData.messageText}`);
+
+messageInput.value = ''
+
+sendDiv.style.display = 'none';
+receiveDiv.style.display = 'block';
+
+} else {
+  alert("YOU ABSOLUTE BARBARIAN, YOU NEED TO TYPE A MESSAGE FIRST")
+}
+
+}
+
+function receiveMessage() {
+
+  for (let i = 0; i < fbDataArray.length; i++) {
+    if(fbDataArray[i].received === false) {
+//  console.log("received message");
+//  console.log(fbDataArray[i].messageText);
+
+  receivedMessage.innerHTML = fbDataArray[i].messageText;
+
+  updateNode(folderName, fbDataArray[i].timestamp, {
+    received: true
+  });
+
+  receiveMessageBtn.style.display = 'none';
+  sendAgain.style.display = 'block';
+
+
+  break;
+
+} else {
+
+receivedMessage.innerHTML = "no more messages";
+}
+}
+}
+
+function sendAgain() {
+
+  receivedMessage.innerHTML = "";
+  receiveMessageBtn.style.display = 'block';
+  sendAgain.style.display = 'none';
+
+  receiveDiv.style.display = 'none';
+  sendDiv.style.display = 'block';
 
 }
