@@ -2,6 +2,9 @@
 
 function gotData(data){
 
+// seed array (uncomment on first time initiallizing database only)
+// seedDatabase(fortunes);
+
   // need to retrieve firebase data with val() method
     // this returns an object of all data
     fbData = data.val();
@@ -34,7 +37,7 @@ firebase.database().ref(_nodeFolder + '/' + _nodeId).set(_nodeObject);
 
 //createNode(folderName, "test", {text:"hey"});
 
-
+}
 // the update method will update an existing node
 function updateNode(_nodeFolder, _nodeID, _updateObject) {
   firebase.database().ref(_nodeFolder + '/' + _nodeID).update(_updateObject);
@@ -49,9 +52,28 @@ function updateNode(_nodeFolder, _nodeID, _updateObject) {
 
 function deleteNode(_nodeFolder, _nodeID) {
 firebase.database().ref(_nodeFolder + '/' + _nodeID).remove();
-}
+
 // call this function in the web console to create and seed the folder!
 // createNode(folderName, "seed", {text: "this is to seed folder"});
 // (to test you can just paste it into the web console)
+
+}
+
+function seedDatabase (_array) {
+
+  _array.forEach(function(item) {
+
+  });
+
+
+  let timestamp = Date.now();
+
+  nodeData = {
+    messageText: item,
+    timestamp: timestamp,
+    received: false,
+  }
+
+  createNode(folderName, timestamp, nodeData);
 
 }

@@ -100,7 +100,10 @@ receiveDiv.style.display = 'block';
 
 function receiveMessage() {
 
+  shuffleArray(fbDataArray);
+
   for (let i = 0; i < fbDataArray.length; i++) {
+
     if(fbDataArray[i].received === false) {
 //  console.log("received message");
 //  console.log(fbDataArray[i].messageText);
@@ -133,4 +136,14 @@ function sendAgain() {
   receiveDiv.style.display = 'none';
   sendDiv.style.display = 'block';
 
+}
+
+function shuffleArray(_array) {
+  for (let i = _array.length - 1; i > 0; i--) {
+
+    let randomIndex = Math.floor(Math.random() * (i + 1));
+
+    [_array[i], _array[randomOndex]] = [_array[randomIndex], _array[i]];
+
+  }
 }
